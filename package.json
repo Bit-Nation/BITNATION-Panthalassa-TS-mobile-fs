@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:dev": "tsc",
+    "build:prod": "rm -f MobileFs.js && tsc -p tsconfig.dev.json",
+    "postinstall": "npm run build:prod"
   },
   "repository": {
     "type": "git",
