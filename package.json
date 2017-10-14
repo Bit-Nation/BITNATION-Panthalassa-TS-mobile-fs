@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build:dev": "tsc",
-    "build:prod": "rm -f MobileFs.js && tsc -p tsconfig.dev.json",
+    "build:dev": "rm -f MobileFs.js && tsc -p tsconfig.dev.json",
+    "build:prod": "tsc",
     "postinstall": "npm run build:prod"
   },
   "repository": {
