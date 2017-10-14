@@ -1,9 +1,14 @@
 import FileSystemInterface from 'BITNATION-Panthalassa-TS-fs-interface/FileSystemInterface'
-import {writeFile, readFile, exists} from 'react-native-fs'
+import {writeFile, readFile, exists, DocumentDirectoryPath} from 'react-native-fs'
+import Path = require('path');
 
 export class MobileFs implements FileSystemInterface {
 
+    constructor(private path: typeof Path) {};
+
     async writeFile(fileName:string, content:string) : Promise<{}> {
+
+        fileName = this.path.normalize(DocumentDirectoryPath + '/' + fileName);
 
         return new Promise((resolve, reject) => {
 
@@ -17,6 +22,8 @@ export class MobileFs implements FileSystemInterface {
 
     async fileExist(fileName:string) : Promise<{}> {
 
+        fileName = this.path.normalize(DocumentDirectoryPath + '/' + fileName);
+
         return new Promise((resolve, reject) => {
 
             exists(fileName)
@@ -28,6 +35,8 @@ export class MobileFs implements FileSystemInterface {
     }
 
     async readFile(fileName:string) : Promise<{}> {
+
+        fileName = this.path.normalize(DocumentDirectoryPath + '/' + fileName);
 
         return new Promise((resolve, reject) => {
 
@@ -41,3 +50,8 @@ export class MobileFs implements FileSystemInterface {
 
 }
 
+export function factory() : MobileFs {
+
+    return new MobileFs(Path);
+
+}
